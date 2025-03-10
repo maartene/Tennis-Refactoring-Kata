@@ -2,7 +2,7 @@
 
 ## ⚠️ TODO
 - `player1Score` and `player2Score` can get a default value - i.e. dont need to be set in initiazer
-- `player1Name` and `player2Name never seem to be used`
+- `player1Name` and `player2Name` never seem to be unused
 - is the hard coded name 'player1' a bug? 
 - in `score` in the final else block, we are looping over the two players in a weird kinda way
  
