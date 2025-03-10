@@ -1,0 +1,4 @@
+module TennisPackageTests {
+    header "/Users/maartene/Developer/Dojo/Tennis-Refactoring-Kata/swift/.build/arm64-apple-macosx/debug/TennisPackageTests.build/TennisPackageTests-Swift.h"
+    requires objc
+}
