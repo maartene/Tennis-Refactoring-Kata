@@ -15,4 +15,4 @@
 - extract method to determine score when the game state is a tie
 - result from `scoreWhenTied` can be returned directly
 - extract method to determine score when one player has an advantage or won the game into a seperate function
-
+- extract final `else` statement from `won` variable
