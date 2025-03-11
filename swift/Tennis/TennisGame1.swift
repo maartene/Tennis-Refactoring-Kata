@@ -29,27 +29,7 @@ class TennisGame1: TennisGame {
         } else if player1Points >= 4 || player2Points >= 4 {
             return scoreWhenOnePlayerHasAnAdvantageOrWon()
         } else {
-            for i in 1 ..< 3 {
-                if i == 1 {
-                    points = player1Points
-                } else {
-                    score = "\(score)-"
-                    points = player2Points
-                }
-                
-                switch points {
-                case 0:
-                    score = "\(score)Love"
-                case 1:
-                    score = "\(score)Fifteen"
-                case 2:
-                    score = "\(score)Thirty"
-                case 3:
-                    score = "\(score)Forty"
-                default:
-                    break
-                }
-            }
+            scoreWithLowNumberOfPoints(&points, &score)
         }
         return score
     }
@@ -78,6 +58,30 @@ class TennisGame1: TennisGame {
             "Win for player1"
         default:
             "Win for player2"
+        }
+    }
+
+    private func scoreWithLowNumberOfPoints(_ points: inout Int, _ score: inout String) {
+        for i in 1 ..< 3 {
+            if i == 1 {
+                points = player1Points
+            } else {
+                score = "\(score)-"
+                points = player2Points
+            }
+            
+            switch points {
+            case 0:
+                score = "\(score)Love"
+            case 1:
+                score = "\(score)Fifteen"
+            case 2:
+                score = "\(score)Thirty"
+            case 3:
+                score = "\(score)Forty"
+            default:
+                break
+            }
         }
     }
 }
