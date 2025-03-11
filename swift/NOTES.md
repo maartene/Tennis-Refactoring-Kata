@@ -9,4 +9,5 @@
 - extracted methods for tie games and games where one player has an advantage over the other (or won)
 
 ## Pomodoro 2
+- first, had to change the test suite to use Swift Testing as the XCTest based version did not work on Linux
 - extract final score case

@@ -45,7 +45,7 @@ let parameters = [
     @Test(arguments: parameters) func testAllScoresTennisGame1(testcase: (player1Points: Int, player2Points: Int, expectedScore: String)) {
         let game = TennisGame1(player1: "player1", player2: "player2")
 
-        playersWinPointsInGame(game: game, player1Points: testcase.player1Points, player2Point: testcase.player2Points)
+        changeGameToTestcaseState(game: game, player1Points: testcase.player1Points, player2Point: testcase.player2Points)
 
         #expect(game.score == testcase.expectedScore)
     }
@@ -53,7 +53,7 @@ let parameters = [
     @Test(arguments: parameters) func testAllScoresTennisGame2(testcase: (player1Points: Int, player2Points: Int, expectedScore: String)) {
         let game = TennisGame2(player1: "player1", player2: "player2")
 
-        playersWinPointsInGame(game: game, player1Points: testcase.player1Points, player2Point: testcase.player2Points)
+        changeGameToTestcaseState(game: game, player1Points: testcase.player1Points, player2Point: testcase.player2Points)
 
         #expect(game.score == testcase.expectedScore)
     }
@@ -61,12 +61,12 @@ let parameters = [
     @Test(arguments: parameters) func testAllScoresTennisGame3(testcase: (player1Points: Int, player2Points: Int, expectedScore: String)) {
         let game = TennisGame3(player1: "player1", player2: "player2")
 
-        playersWinPointsInGame(game: game, player1Points: testcase.player1Points, player2Point: testcase.player2Points)
+        changeGameToTestcaseState(game: game, player1Points: testcase.player1Points, player2Point: testcase.player2Points)
 
         #expect(game.score == testcase.expectedScore)
     }
 
-    private func playersWinPointsInGame(game: TennisGame, player1Points: Int, player2Point: Int) {
+    private func changeGameToTestcaseState(game: TennisGame, player1Points: Int, player2Point: Int) {
         let highestScore = max(player1Points, player2Point);
         for i in 0..<highestScore {
             if i < player1Points {
