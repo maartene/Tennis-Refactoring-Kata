@@ -22,7 +22,6 @@ class TennisGame1: TennisGame {
     }
     
     var score: String? {
-        var score = ""
         var points = 0
         if player1Points == player2Points {
             return scoreWhenTied()
@@ -31,7 +30,6 @@ class TennisGame1: TennisGame {
         } else {
             return scoreWithLowNumberOfPoints(&points)
         }
-        return score
     }
     
     private func scoreWhenTied() -> String {
