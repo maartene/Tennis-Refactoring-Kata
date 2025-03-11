@@ -29,7 +29,7 @@ class TennisGame1: TennisGame {
         } else if player1Points >= 4 || player2Points >= 4 {
             return scoreWhenOnePlayerHasAnAdvantageOrWon()
         } else {
-            scoreWithLowNumberOfPoints(&points, &score)
+            return scoreWithLowNumberOfPoints(&points)
         }
         return score
     }
@@ -61,7 +61,8 @@ class TennisGame1: TennisGame {
         }
     }
 
-    private func scoreWithLowNumberOfPoints(_ points: inout Int, _ score: inout String) {
+    private func scoreWithLowNumberOfPoints(_ points: inout Int) -> String {
+        var score = "" 
         for i in 1 ..< 3 {
             if i == 1 {
                 points = player1Points
@@ -83,5 +84,7 @@ class TennisGame1: TennisGame {
                 break
             }
         }
+
+        return score
     }
 }
