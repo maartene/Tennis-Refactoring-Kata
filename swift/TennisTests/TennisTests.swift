@@ -1,4 +1,4 @@
-import XCTest
+import Testing
 
 let parameters = [
     (0, 0, "Love-All"),
@@ -41,70 +41,40 @@ let parameters = [
     (14, 16, "Win for player2")
 ]
 
-class TennisTests: XCTestCase {
-    var player1Score: Int!
-    var player2Score: Int!
-    var expectedScore: String!
-}
+@Suite struct TennisTests {
+    @Test(arguments: parameters) func testAllScoresTennisGame1(testcase: (player1Points: Int, player2Points: Int, expectedScore: String)) {
+        let game = TennisGame1(player1: "player1", player2: "player2")
 
-// MARK: Suite
-extension TennisTests {
-    override open class var defaultTestSuite: XCTestSuite {
-        let testSuite = XCTestSuite(name: NSStringFromClass(self))
-        
-        for scores in parameters {
-            addTest(forEachInvocationWith: scores, to: testSuite)
-        }
-        
-        return testSuite
-    }
-    
-    private class func addTest(forEachInvocationWith scores: (Int, Int, String), to testSuite: XCTestSuite) {
-        for testInvocation in testInvocations {
-            let test = TennisTests(invocation: testInvocation)
-            test.player1Score = scores.0
-            test.player2Score = scores.1
-            test.expectedScore = scores.2
-            testSuite.addTest(test)
-        }
-    }
-}
+        playersWinPointsInGame(game: game, player1Points: testcase.player1Points, player2Point: testcase.player2Points)
 
-// MARK: Invocations
-extension TennisTests {
-    func testAllScoresTennisGame1() {
-        instantiateAndCheckGame(class: TennisGame1.self)
-    }
-    
-    func testAllScoresTennisGame2() {
-        instantiateAndCheckGame(class: TennisGame2.self)
+        #expect(game.score == testcase.expectedScore)
     }
 
-    func testAllScoresTennisGame3() {
-        instantiateAndCheckGame(class: TennisGame3.self)
+    @Test(arguments: parameters) func testAllScoresTennisGame2(testcase: (player1Points: Int, player2Points: Int, expectedScore: String)) {
+        let game = TennisGame2(player1: "player1", player2: "player2")
+
+        playersWinPointsInGame(game: game, player1Points: testcase.player1Points, player2Point: testcase.player2Points)
+
+        #expect(game.score == testcase.expectedScore)
     }
 
-    private func instantiateAndCheckGame(class aClass: TennisGame.Type) {
-        let game = instantiateGame(class: aClass)
-        checkAllScores(for: game)
+    @Test(arguments: parameters) func testAllScoresTennisGame3(testcase: (player1Points: Int, player2Points: Int, expectedScore: String)) {
+        let game = TennisGame3(player1: "player1", player2: "player2")
+
+        playersWinPointsInGame(game: game, player1Points: testcase.player1Points, player2Point: testcase.player2Points)
+
+        #expect(game.score == testcase.expectedScore)
     }
-    
-    private func instantiateGame(class aClass: TennisGame.Type) -> TennisGame {
-        let instance = aClass.init(player1: "player1", player2: "player2")
-        return instance
-    }
-    
-    private func checkAllScores(for game: TennisGame) {
-        print("\(player1Score!), \(player2Score!), \(expectedScore!)")
-        let highestScore = max(player1Score, player2Score);
+
+    private func playersWinPointsInGame(game: TennisGame, player1Points: Int, player2Point: Int) {
+        let highestScore = max(player1Points, player2Point);
         for i in 0..<highestScore {
-            if i < player1Score {
+            if i < player1Points {
                 game.wonPoint("player1")
             }
-            if i < player2Score {
+            if i < player2Point {
                 game.wonPoint("player2")
             }
         }
-        XCTAssertEqual(game.score, expectedScore)
     }
 }
