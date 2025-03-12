@@ -3,14 +3,12 @@ import Foundation
 class TennisGame1: TennisGame {
     private let player1Name: String
     private let player2Name: String
-    private var player1Points: Int
-    private var player2Points: Int
+    private var player1Points = 0
+    private var player2Points = 0
     
     required init(player1: String, player2: String) {
         self.player1Name = player1
         self.player2Name = player2
-        self.player1Points = 0
-        self.player2Points = 0
     }
 
     func wonPoint(_ playerName: String) {

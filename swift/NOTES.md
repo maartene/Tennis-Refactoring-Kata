@@ -10,4 +10,6 @@
 
 ## Pomodoro 2
 - ✅ first, had to change the test suite to use Swift Testing as the XCTest based version did not work on Linux
-- ⚠️ extract final score case
+
+## Pomodoro 3
+- ✅ extract final score case
