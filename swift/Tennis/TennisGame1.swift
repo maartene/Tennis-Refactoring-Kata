@@ -18,15 +18,19 @@ class TennisGame1: TennisGame {
             player2Points += 1
         }
     }
-    
+
     var score: String? {
-        if player1Points == player2Points {
+        if playersHaveEqualNumberOfPoints {
             return scoreWhenTied()
-        } else if player1Points >= 4 || player2Points >= 4 {
+        } else if aPlayerHasAnAdvantageOrWonTheGame {
             return scoreWhenOnePlayerHasAnAdvantageOrWon()
         } else {
             return scoreWithLowNumberOfPoints()
         }
+    }
+
+    private var playersHaveEqualNumberOfPoints: Bool {
+        player1Points == player2Points
     }
     
     private func scoreWhenTied() -> String {
@@ -38,6 +42,10 @@ class TennisGame1: TennisGame {
         ]
         
         return scoreWhenTied[player1Points, default: "Deuce"]
+    }
+
+    private var aPlayerHasAnAdvantageOrWonTheGame: Bool {
+        player1Points >= 4 || player2Points >= 4
     }
     
     private func scoreWhenOnePlayerHasAnAdvantageOrWon() -> String {

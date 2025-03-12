@@ -13,3 +13,4 @@
 
 ## Pomodoro 3
 - ✅ extract final score case
+- ⚠️ extract conditionals
