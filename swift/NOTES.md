@@ -13,4 +13,5 @@
 
 ## Pomodoro 3
 - ✅ extract final score case
-- ⚠️ extract conditionals
+- ✅ extract conditionals
+- ✅ introduce strategy pattern
