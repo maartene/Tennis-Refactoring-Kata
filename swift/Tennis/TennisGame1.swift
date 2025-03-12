@@ -20,13 +20,15 @@ class TennisGame1: TennisGame {
     }
 
     var score: String? {
-        if playersHaveEqualNumberOfPoints {
-            return scoreWhenTied()
-        } else if aPlayerHasAnAdvantageOrWonTheGame {
-            return scoreWhenOnePlayerHasAnAdvantageOrWon()
-        } else {
-            return scoreWithLowNumberOfPoints()
-        }
+        let scoringStrategies: [(applies: Bool, convertToScore: () -> String)] = [
+            (playersHaveEqualNumberOfPoints, scoreWhenTied),
+            (aPlayerHasAnAdvantageOrWonTheGame, scoreWhenOnePlayerHasAnAdvantageOrWon),
+            (true, scoreWithLowNumberOfPoints)
+        ]
+
+        return scoringStrategies
+            .first { $0.applies }?
+            .convertToScore()
     }
 
     private var playersHaveEqualNumberOfPoints: Bool {
