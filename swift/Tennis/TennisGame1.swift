@@ -32,16 +32,14 @@ class TennisGame1: TennisGame {
     }
     
     private func scoreWhenTied() -> String {
-        switch player1Points {
-        case 0:
-            "Love-All"
-        case 1:
-            "Fifteen-All"
-        case 2:
-            "Thirty-All"
-        default:
-            "Deuce"
-        }
+        let scoreWhenTied = [
+            0: "Love-All",
+            1: "Fifteen-All",
+            2: "Thirty-All",
+            3: "Deuce"
+        ]
+        
+        return scoreWhenTied[player1Points, default: "Deuce"]
     }
     
     private func scoreWhenOnePlayerHasAnAdvantageOrWon() -> String {
