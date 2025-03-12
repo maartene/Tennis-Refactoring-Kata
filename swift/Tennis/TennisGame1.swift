@@ -23,15 +23,15 @@ class TennisGame1: TennisGame {
         let scoringStrategies: [ScoringStrategy] = [
             (playersHaveEqualNumberOfPoints, scoreWhenTied),
             (aPlayerHasAnAdvantageOrWonTheGame, scoreWhenOnePlayerHasAnAdvantageOrWon),
-            (true, scoreWithLowNumberOfPoints)
+            ({ _,_ in true }, scoreWithLowNumberOfPoints)
         ]
 
         return scoringStrategies
-            .first { $0.applies }?
+            .first { $0.applies(player1Points, player2Points) }?
             .convertToScore(player1Points, player2Points)
     }
 
-    private var playersHaveEqualNumberOfPoints: Bool {
+    private func playersHaveEqualNumberOfPoints(player1Score: Int, player2Score: Int) -> Bool {
         player1Points == player2Points
     }
     
@@ -46,7 +46,7 @@ class TennisGame1: TennisGame {
         return scoreWhenTied[player1Points, default: "Deuce"]
     }
 
-    private var aPlayerHasAnAdvantageOrWonTheGame: Bool {
+    private func aPlayerHasAnAdvantageOrWonTheGame(player1Score: Int, player2Score: Int) -> Bool {
         player1Points >= 4 || player2Points >= 4
     }
     
@@ -76,4 +76,4 @@ class TennisGame1: TennisGame {
     }
 }
 
-typealias ScoringStrategy = (applies: Bool, convertToScore: (Int, Int) -> String)
+typealias ScoringStrategy = (applies: (Int, Int) -> Bool, convertToScore: (Int, Int) -> String)
