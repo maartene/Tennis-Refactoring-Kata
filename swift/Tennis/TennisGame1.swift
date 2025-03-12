@@ -21,21 +21,28 @@ class TennisGame1: TennisGame {
 
     var score: String? {
         let scoringStrategies: [ScoringStrategy] = [
-            (playersHaveEqualNumberOfPoints, scoreWhenTied),
-            (aPlayerHasAnAdvantageOrWonTheGame, scoreWhenOnePlayerHasAnAdvantageOrWon),
-            ({ _,_ in true }, scoreWithLowNumberOfPoints)
+            EqualPointsScoringStrategy(),
+            PlayerHasAdvantageOrWonScoringStrategy(),
+            LowPointStateScoringStrategy()
         ]
 
         return scoringStrategies
-            .first { $0.applies(player1Points, player2Points) }?
-            .convertToScore(player1Points, player2Points)
+            .first { $0.applies(player1Points: player1Points, player2Points: player2Points) }?
+            .convertToScore(player1Points: player1Points, player2Points: player2Points)
     }
+}
 
-    private func playersHaveEqualNumberOfPoints(player1Score: Int, player2Score: Int) -> Bool {
+protocol ScoringStrategy {
+    func applies(player1Points: Int, player2Points: Int) -> Bool
+    func convertToScore(player1Points: Int, player2Points: Int) -> String
+}   
+
+struct EqualPointsScoringStrategy: ScoringStrategy {
+    func applies(player1Points: Int, player2Points: Int) -> Bool {
         player1Points == player2Points
     }
-    
-    private func scoreWhenTied(player1Points: Int, player2Points: Int) -> String {
+
+    func convertToScore(player1Points: Int, player2Points: Int) -> String {
         let scoreWhenTied = [
             0: "Love-All",
             1: "Fifteen-All",
@@ -45,12 +52,14 @@ class TennisGame1: TennisGame {
         
         return scoreWhenTied[player1Points, default: "Deuce"]
     }
+}
 
-    private func aPlayerHasAnAdvantageOrWonTheGame(player1Score: Int, player2Score: Int) -> Bool {
+struct PlayerHasAdvantageOrWonScoringStrategy: ScoringStrategy {
+    func applies(player1Points: Int, player2Points: Int) -> Bool {
         player1Points >= 4 || player2Points >= 4
     }
     
-    private func scoreWhenOnePlayerHasAnAdvantageOrWon(player1Points: Int, player2Points: Int) -> String {
+    func convertToScore(player1Points: Int, player2Points: Int) -> String {
         let pointsAdvantagePlayer1 = player1Points - player2Points
         return switch pointsAdvantagePlayer1 {
         case 1:
@@ -63,8 +72,14 @@ class TennisGame1: TennisGame {
             "Win for player2"
         }
     }
+}
 
-    private func scoreWithLowNumberOfPoints(player1Points: Int, player2Points: Int) -> String {
+struct LowPointStateScoringStrategy: ScoringStrategy {
+    func applies(player1Points: Int, player2Points: Int) -> Bool {
+        true
+    }
+
+    func convertToScore(player1Points: Int, player2Points: Int) -> String {
         let pointsToScore = [
             0: "Love",
             1: "Fifteen",
@@ -75,5 +90,3 @@ class TennisGame1: TennisGame {
         return "\(pointsToScore[player1Points]!)-\(pointsToScore[player2Points]!)" 
     }
 }
-
-typealias ScoringStrategy = (applies: (Int, Int) -> Bool, convertToScore: (Int, Int) -> String)
