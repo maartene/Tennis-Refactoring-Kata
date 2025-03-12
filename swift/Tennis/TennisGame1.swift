@@ -58,36 +58,22 @@ class TennisGame1: TennisGame {
         }
     }
 
-    private func pointsToScore(_ points: Int, _ score: inout String) {
+    private func scoreWithLowNumberOfPoints() -> String {
+        "\(pointsToScore(player1Points))-\(pointsToScore(player2Points))" 
+    }
+
+    private func pointsToScore(_ points: Int) -> String {
         switch points {
-            case 0:
-                score = "\(score)Love"
-            case 1:
-                score = "\(score)Fifteen"
-            case 2:
-                score = "\(score)Thirty"
-            case 3:
-                score = "\(score)Forty"
-            default:
-                break
-            }
+        case 0:
+            return "Love"
+        case 1:
+            return "Fifteen"
+        case 2:
+            return "Thirty"
+        case 3:
+            return "Forty"
+        default:
+            return "" 
         }
-
-private func scoreWithLowNumberOfPoints() -> String {
-        var score = ""
-        var points = 0
-
-        for i in 1 ..< 3 {
-            if i == 1 {
-                points = player1Points
-            } else {
-                score = "\(score)-"
-                points = player2Points
-            }
-            
-            pointsToScore(points, &score)
-        }
-
-        return score
     }
 }
