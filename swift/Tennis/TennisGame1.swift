@@ -59,21 +59,13 @@ class TennisGame1: TennisGame {
     }
 
     private func scoreWithLowNumberOfPoints() -> String {
-        "\(pointsToScore(player1Points))-\(pointsToScore(player2Points))" 
-    }
+        let pointsToScore = [
+            0: "Love",
+            1: "Fifteen",
+            2: "Thirty",
+            3: "Forty"
+        ]
 
-    private func pointsToScore(_ points: Int) -> String {
-        switch points {
-        case 0:
-            return "Love"
-        case 1:
-            return "Fifteen"
-        case 2:
-            return "Thirty"
-        case 3:
-            return "Forty"
-        default:
-            return "" 
-        }
+        return "\(pointsToScore[player1Points]!)-\(pointsToScore[player2Points]!)" 
     }
 }
