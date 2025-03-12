@@ -3,8 +3,6 @@
 ## ⚠️ TODO
 - `player1Name` and `player2Name` never seem to be unused
 - is the hard coded name 'player1' a bug? 
-- extract conditionals
-
  
 ## ✅ DONE
 - Rename `player1` and `player2` to `player1Name` and `player2Name`
@@ -19,3 +17,4 @@
 - in `scoreWithLowNumberOfPoints`, we are looping over the two players in a weird kinda way
 - convert `pointsToScore` to a local lookup table
 - `player1Score` and `player2Score` can get a default value - i.e. dont need to be set in initiazer
+- extract conditionals

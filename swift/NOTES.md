@@ -15,3 +15,6 @@
 - ✅ extract final score case
 - ✅ extract conditionals
 - ✅ introduce strategy pattern
+
+## Pomodoro 4
+- ⚠️ Lets fix the bug!
