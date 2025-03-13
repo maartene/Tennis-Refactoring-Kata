@@ -11,6 +11,6 @@ let package = Package(
             name: "TennisTests",
             dependencies: [],
             path: ""
-        ),
+        )
     ]
 )

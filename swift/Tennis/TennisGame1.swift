@@ -5,17 +5,20 @@ class TennisGame1: TennisGame {
     private let player2Name: String
     private var player1Points = 0
     private var player2Points = 0
-    
+
     required init(player1: String, player2: String) {
         self.player1Name = player1
         self.player2Name = player2
     }
 
     func wonPoint(_ playerName: String) {
-        if playerName == player1Name {
+        switch playerName {
+        case player1Name:
             player1Points += 1
-        } else {
+        case player2Name:
             player2Points += 1
+        default:
+            fatalError("Only \(player1Name) and \(player2Name) can win a point.")
         }
     }
 
@@ -35,7 +38,7 @@ class TennisGame1: TennisGame {
 protocol ScoringStrategy {
     func applies(player1Points: Int, player2Points: Int) -> Bool
     func convertToScore(player1Points: Int, player2Points: Int) -> String
-}   
+}
 
 struct EqualPointsScoringStrategy: ScoringStrategy {
     func applies(player1Points: Int, player2Points: Int) -> Bool {
@@ -49,7 +52,7 @@ struct EqualPointsScoringStrategy: ScoringStrategy {
             2: "Thirty-All",
             3: "Deuce"
         ]
-        
+
         return scoreWhenTied[player1Points, default: "Deuce"]
     }
 }
@@ -58,7 +61,7 @@ struct PlayerHasAdvantageOrWonScoringStrategy: ScoringStrategy {
     func applies(player1Points: Int, player2Points: Int) -> Bool {
         player1Points >= 4 || player2Points >= 4
     }
-    
+
     func convertToScore(player1Points: Int, player2Points: Int) -> String {
         let pointsAdvantagePlayer1 = player1Points - player2Points
         return switch pointsAdvantagePlayer1 {
@@ -87,6 +90,6 @@ struct LowPointStateScoringStrategy: ScoringStrategy {
             3: "Forty"
         ]
 
-        return "\(pointsToScore[player1Points]!)-\(pointsToScore[player2Points]!)" 
+        return "\(pointsToScore[player1Points]!)-\(pointsToScore[player2Points]!)"
     }
 }

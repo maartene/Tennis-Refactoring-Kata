@@ -1,6 +1,7 @@
 #  TECHDEBT
 
 ## ⚠️ TODO
+- Fix player name bug in `TennisGame2` and `TennisGame3` too.
  
 ## ✅ DONE
 - Rename `player1` and `player2` to `player1Name` and `player2Name`
