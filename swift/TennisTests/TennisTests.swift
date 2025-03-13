@@ -49,6 +49,14 @@ let parameters = [
 
         #expect(game.score == testcase.expectedScore)
     }
+    
+    @Test func testScoreWithRealNames() {
+        let game = TennisGame1(player1: "Maarten", player2: "Iris")
+        
+        changeGameToTestcaseState(game: game, player1Points: 4, player1Name: "Maarten", player2Point: 4, player2Name: "Iris")
+        
+        #expect(game.score == "Deuce")
+    }
 
     @Test(arguments: parameters) func testAllScoresTennisGame2(testcase: (player1Points: Int, player2Points: Int, expectedScore: String)) {
         let game = TennisGame2(player1: "player1", player2: "player2")
@@ -66,14 +74,14 @@ let parameters = [
         #expect(game.score == testcase.expectedScore)
     }
 
-    private func changeGameToTestcaseState(game: TennisGame, player1Points: Int, player2Point: Int) {
+    private func changeGameToTestcaseState(game: TennisGame, player1Points: Int, player1Name: String = "player1", player2Point: Int, player2Name: String = "player2") {
         let highestScore = max(player1Points, player2Point);
         for i in 0..<highestScore {
             if i < player1Points {
-                game.wonPoint("player1")
+                game.wonPoint(player1Name)
             }
             if i < player2Point {
-                game.wonPoint("player2")
+                game.wonPoint(player2Name)
             }
         }
     }

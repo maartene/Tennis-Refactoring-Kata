@@ -17,4 +17,4 @@
 - ✅ introduce strategy pattern
 
 ## Pomodoro 4
-- ⚠️ Lets fix the bug!
+- ✅ Lets fix the bug!
