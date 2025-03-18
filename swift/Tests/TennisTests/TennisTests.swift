@@ -1,4 +1,4 @@
-import Testing
+@_spi(Experimental) import Testing
 @testable import Tennis
 
 let parameters = [
@@ -84,6 +84,15 @@ let parameters = [
             if i < player2Point {
                 game.wonPoint(player2Name)
             }
+        }
+    }
+}
+
+@Suite struct CrashTests {
+    @Test("When a player wins a point that is unknown to the game, the game crashes") func gameCrashesWhenUnknownPlayerWinsPoint() async {
+        await #expect(exitsWith: .failure) {
+            let game = TennisGame1(player1: "Foo", player2: "Bar")
+            game.wonPoint("Baz")
         }
     }
 }
