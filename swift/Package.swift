@@ -7,10 +7,12 @@ let package = Package(
     products: [
     ],
     targets: [
+        .target(name: "Tennis"),
         .testTarget(
             name: "TennisTests",
-            dependencies: [],
-            path: ""
+            dependencies: [
+                "Tennis",
+            ]
         )
     ]
 )
