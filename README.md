@@ -1,4 +1,5 @@
-_Support this and all my katas via [Patreon](https://www.patreon.com/EmilyBache)_
+Original kata: https://github.com/emilybache/Tennis-Refactoring-Kata
+_Support this and all Emily's katas via [Patreon](https://www.patreon.com/EmilyBache)_
 
 # Tennis Refactoring Kata
 
