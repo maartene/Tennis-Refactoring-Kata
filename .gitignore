@@ -31,3 +31,5 @@ xcuserdata
 .VolumeIcon.icns
 
 .build
+.swiftpm
+.DS_Store
